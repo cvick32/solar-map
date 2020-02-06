@@ -1,5 +1,4 @@
-<p>
-  {{ currentPower }}
-</p>
+<h1 mat-dialog-title class="info-text" *ngIf="currentPower === 0">Draw a polygon on the map below to see its power output.</h1>
+<h1 mat-dialog-title class="info-text">Area's Nominal Power: {{currentPowerUpdate | async}} KW</h1>
 
 <div #map style="width:50%;height:400px;margin: auto;">
