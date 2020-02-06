@@ -5,6 +5,8 @@ Google Maps API: I used the Google Maps API because it offered search and drawin
 
 Solar Assumptions: After reading a few online resources, I decided on my values for the average wattage and efficiency per square meter of paneling (src/solar-calculation.ts). I linked to the wiki entry where I found the bounding values for my assumptions in the file. I also assumer similar sunlight conditions and air quality/cloud coverage for ease of calculation (https://en.wikipedia.org/wiki/Nominal_power_(photovoltaic)). Again, I'm not an expert in calculating nominal power, so I've relied on the resources at my disposal to build something reasonable.
 
+See the screencaps folder to some static examples.
+
 ## Development server
 
 Run `npm i` in the top level directoy to install the necessary packages.
