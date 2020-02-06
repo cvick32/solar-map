@@ -5,6 +5,13 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 import { Location } from '../location.model';
 import { calculatePower } from '../solar-calculation';
 
+
+/**
+ * The Map Component handles rendering and drawing on the Map.
+ * It subscribes to the search service so we can move the Map
+ * based on user input. I learned most of this on the fly from
+ * the official Google API documentation.
+ */
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',

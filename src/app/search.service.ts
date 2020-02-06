@@ -3,6 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Location } from './location.model';
 
+
+/**
+ * This service updates the app's location based on a given address.
+ * The components that subsribe to the locationUpdated Subject receive
+ * updates about the location.
+ */
 @Injectable({
   providedIn: 'root'
 })

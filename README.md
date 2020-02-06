@@ -12,3 +12,7 @@ See the screencaps folder to some static examples.
 Run `npm i` in the top level directoy to install the necessary packages.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+
+## Code Navigation
+
+The `src/app/` contains all of the non-boilerplate code that I wrote. The `search.service` handles address searching. The `map/` directory contains all of the files for rendering and retrieving map data. The  `search/` directory renders and calls the `search.service` with user input. `solar-calculation.ts` contains my rationale and calculations given an area. The `header` component is stylistic. 
