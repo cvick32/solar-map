@@ -1,18 +1,14 @@
 # SolarMap
+This project implements search and drawing functionality over US addresses. Once a polygon has been drawn on the map, the website will generate the nominal power from the given polygon, as if the area of the polygon was covered in solar panels. Only one polygon can be drawn on the map at a time. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+Google Maps API: I used the Google Maps API because it offered search and drawing capabilities out of the box. The documentation was also very clear, so the overhead was minimal.
+
+Solar Assumptions: After reading a few online resources, I decided on my values for the average wattage and efficiency per square meter of paneling (src/solar-calculation.ts). I linked to the wiki entry where I found the bounding values for my assumptions in the file
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
@@ -22,6 +18,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
