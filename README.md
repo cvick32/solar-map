@@ -7,5 +7,6 @@ Solar Assumptions: After reading a few online resources, I decided on my values 
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm i` in the top level directoy to install the necessary packages.
 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
