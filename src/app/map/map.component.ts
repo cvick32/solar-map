@@ -3,6 +3,7 @@ import { } from 'googlemaps';
 import { SearchService } from '../search.service';
 import { Subscription } from 'rxjs';
 import { Location } from '../location.model';
+import { calculatePower } from '../solar-calculation';
 
 @Component({
   selector: 'app-map',
@@ -10,7 +11,6 @@ import { Location } from '../location.model';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, OnDestroy {
-
   title = 'solar-map';
   @ViewChild('map') mapElement: any;
   map: google.maps.Map;
@@ -23,6 +23,7 @@ export class MapComponent implements OnInit, OnDestroy {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   currentShape: google.maps.Polygon;
+  currentPower = 0;
 
   private locationSub: Subscription;
 
@@ -41,12 +42,10 @@ export class MapComponent implements OnInit, OnDestroy {
         this.location = locationData.location;
         this.mapProperties.center = new google.maps.LatLng(this.location.lat, this.location.lng);
         this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+        this.addDrawingToMap();
       });
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-    this.drawManager = new google.maps.drawing.DrawingManager();
-    this.drawManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON); // only allow polygons drawing
-    this.drawManager.setMap(this.map);
-    google.maps.event.addListener(this.drawManager, 'overlaycomplete', this.addShape);
+    this.addDrawingToMap();
   }
 
   /**
@@ -57,7 +56,17 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Add a completed shape into the list of shapes currently available.
+   * Add the drawingManager API to the map, with addShape listener.
+   */
+  addDrawingToMap() {
+    this.drawManager = new google.maps.drawing.DrawingManager();
+    this.drawManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON); // only allow polygons drawing
+    this.drawManager.setMap(this.map);
+    google.maps.event.addListener(this.drawManager, 'overlaycomplete', this.addShape);
+  }
+  /**
+   * Add a completed shape into the list of shapes currently available
+   * and calculate power.
    * @param event completed shape event
    */
   addShape(event) {
@@ -66,5 +75,9 @@ export class MapComponent implements OnInit, OnDestroy {
       this.currentShape.setMap(null);
     }
     this.currentShape = event.overlay;
+    // result of the polygon's area in square meters
+    // (https://developers.google.com/maps/documentation/javascript/reference/geometry#spherical.computeArea)
+    const area = google.maps.geometry.spherical.computeArea(this.currentShape.getPath());
+    this.currentPower = calculatePower(area);
   }
 }
