@@ -14,5 +14,5 @@ export function calculatePower(area: number) {
   if (kwH < 5) {
     return kwH;
   }
-  return Math.round((kwH);
+  return Math.round((kwH));
 }
