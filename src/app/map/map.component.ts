@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { } from 'googlemaps';
 import { SearchService } from '../search.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { Location } from '../location.model';
 import { calculatePower } from '../solar-calculation';
 
@@ -15,19 +15,20 @@ export class MapComponent implements OnInit, OnDestroy {
   @ViewChild('map') mapElement: any;
   map: google.maps.Map;
   drawManager: google.maps.drawing.DrawingManager;
-  // start at the MFA
-  location: Location = {'lat': 42.3403888, 'lng': -71.09295999999999};
+  location: Location = {'lat': 42.3403888, 'lng': -71.09295999999999}; // start at the MFA
   mapProperties = {
     center: new google.maps.LatLng(this.location.lat, this.location.lng),
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
   currentShape: google.maps.Polygon;
   currentPower = 0;
+  currentPowerUpdate =  new BehaviorSubject<number>(this.currentPower);
 
   private locationSub: Subscription;
 
-  constructor(public searchService: SearchService) { }
+  constructor(public searchService: SearchService) {}
 
   /**
    * Sets up inital map values and subscription to the
@@ -62,8 +63,9 @@ export class MapComponent implements OnInit, OnDestroy {
     this.drawManager = new google.maps.drawing.DrawingManager();
     this.drawManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON); // only allow polygons drawing
     this.drawManager.setMap(this.map);
-    google.maps.event.addListener(this.drawManager, 'overlaycomplete', this.addShape);
+    google.maps.event.addListener(this.drawManager, 'overlaycomplete', this.addShape.bind(this));
   }
+
   /**
    * Add a completed shape into the list of shapes currently available
    * and calculate power.
@@ -79,5 +81,6 @@ export class MapComponent implements OnInit, OnDestroy {
     // (https://developers.google.com/maps/documentation/javascript/reference/geometry#spherical.computeArea)
     const area = google.maps.geometry.spherical.computeArea(this.currentShape.getPath());
     this.currentPower = calculatePower(area);
+    this.currentPowerUpdate.next(this.currentPower);
   }
 }
