@@ -1,0 +1,16 @@
+form {
+  width: 50%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 40%;
+}
+
+button {
+  float: inherit;
+  width: 20%;
+}
