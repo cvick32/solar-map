@@ -25,9 +25,6 @@ export class SearchService {
   searchAddress(address: string) {
     const api_call = `${this.api_url}?address=${address}&key=${this.geocode_api_key}&region=${this.region}`;
     this.http.get(api_call).subscribe((response: any) => {
-      if (response.status !== 'OK') {
-        return; // error message tbd
-      }
       this.location = response.results[0].geometry.location;
       this.locationUpdated.next({location: this.location});
     });
