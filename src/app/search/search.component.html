@@ -1,0 +1,11 @@
+<form (submit)='onSearchAddress(addressForm)' #addressForm='ngForm'>
+  <mat-form-field>
+      <input
+        matInput
+        name="address"
+        ngModel
+        placeholder='Search an Address'
+        required>
+  </mat-form-field>
+  <button mat-raised-button color="accent" type="submit">Search</button>
+</form>
