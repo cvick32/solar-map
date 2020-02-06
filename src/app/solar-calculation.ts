@@ -2,10 +2,10 @@
 const wattsPerSquareMeter = 250;
 const efficiency = .2;
 /**
- * Given an area in square meters, return the nominal power
- * of the area if it were a solar installation.
+ * Given an area in square meters, return the nominal power in
+ * Kilowatts of the area if it were a solar installation.
  * @param area square meters
  */
 export function calculatePower(area: number) {
-  return area * wattsPerSquareMeter * efficiency;
+  return Math.round((area * wattsPerSquareMeter * efficiency) / 1000);
 }
