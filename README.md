@@ -3,7 +3,7 @@ This project implements search and drawing functionality over US addresses. Once
 
 Google Maps API: I used the Google Maps API because it offered search and drawing capabilities out of the box. The documentation was also very clear, so the overhead was minimal.
 
-Solar Assumptions: After reading a few online resources, I decided on my values for the average wattage and efficiency per square meter of paneling (src/solar-calculation.ts). I linked to the wiki entry where I found the bounding values for my assumptions in the file. I also assumer similar sunlight conditions and air quality/cloud coverage for ease of calculation (https://en.wikipedia.org/wiki/Nominal_power_(photovoltaic)).
+Solar Assumptions: After reading a few online resources, I decided on my values for the average wattage and efficiency per square meter of paneling (src/solar-calculation.ts). I linked to the wiki entry where I found the bounding values for my assumptions in the file. I also assumer similar sunlight conditions and air quality/cloud coverage for ease of calculation (https://en.wikipedia.org/wiki/Nominal_power_(photovoltaic)). Again, I'm not an expert in calculating nominal power, so I've relied on the resources at my disposal to build something reasonable.
 
 ## Development server
 
